@@ -490,7 +490,7 @@
             android:layout_gravity="center"
             android:background="@drawable/ic_launcher_background_login"
             android:gravity="center"
-            android:onClick="buttonClickEvent"
+            android:onClick="btCallphone"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:paddingBottom="5dp"
