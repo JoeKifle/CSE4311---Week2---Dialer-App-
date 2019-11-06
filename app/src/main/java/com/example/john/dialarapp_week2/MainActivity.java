@@ -169,10 +169,15 @@ public class MainActivity extends AppCompatActivity {
 
             }else{
 
-                String dial = "tel:"+number;
+                String dial = "tel:" + number;
                 startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
 
             }
+
+
+
+
+            //  https://github.com/JoeKifle/
 
 
         }else{
@@ -198,7 +203,6 @@ public class MainActivity extends AppCompatActivity {
             }else{
 
                 Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
-
 
             }
 
