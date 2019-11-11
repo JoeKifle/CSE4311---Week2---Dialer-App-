@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -160,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
 
         String number  = edtPhoneNo.getText().toString();
 
+        Log.d("Number",number.toString());
+
         if(number.trim().length() > 0){
 
 
@@ -169,16 +172,21 @@ public class MainActivity extends AppCompatActivity {
 
             }else{
 
-                String dial = "tel:" + number;
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                String callstring;
 
-            }
+                if((number.startsWith("*"))&&(number.endsWith("#"))){
+                    //if true then it is a USSD call----
+                    callstring=number.substring(0, number.length()-1);
+                    callstring=callstring+Uri.encode("#");
+                    Log.d("CALL TYPE: ", "USSD CALL");
+                }else{
+                    callstring=number;
+                    Log.d("CALL TYPE:", "Not a USSD CALL");
+                }
+                Intent intent=new Intent(android.content.Intent.ACTION_CALL,Uri.parse("tel:"+callstring));
+                startActivity(intent);
 
-
-
-
-            //  https://github.com/JoeKifle/
-
+             }
 
         }else{
 
@@ -187,7 +195,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
@@ -205,10 +212,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
 
             }
-
-
         }
-
-
     }
 }
